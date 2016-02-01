@@ -1,3 +1,86 @@
 body {
+    font-family: sans-serif;
     text-align: center;
+    background-color: #222;
 }
+
+img {
+  width: 35px;
+  vertical-align: middle;
+}
+
+canvas {
+  margin-bottom: 0;
+}
+
+p {
+  margin: 0;
+}
+
+
+.stats {
+  margin: 0 auto;
+  width: 505px;
+  text-transform: uppercase;
+  font-size: 1.8em;
+  color: #eee;
+  padding-top: 5px;
+}
+
+.stats p {
+  display: inline-block;
+  margin-top: 0;
+}
+
+.score {
+  color: gold;
+}
+
+.score-minus {
+  color: red;
+}
+
+.score-plus {
+  color: green;
+}
+
+.star-icon {
+  margin-bottom: 6px;
+}
+
+.heart-icon {
+  margin-left: 30px;
+  margin-bottom: 5px;
+}
+
+.display-none {
+  display: none;
+}
+
+#game-message {
+  display: inline-block;
+  color: gold;
+  text-transform: uppercase;
+}
+
+.results {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#button {
+  background-color: gold;
+  border: none;
+  font-size: 1.2em;
+  color: #222;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 30px;
+  display: inline-block;
+}
+
+#game-over {
+  display: block;
+}
+
+

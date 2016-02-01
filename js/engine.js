@@ -80,6 +80,9 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
+        gameStatus();
+        scoreDisplay();
+        livesDisplay();
         // checkCollisions();
     }
 
@@ -94,7 +97,9 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
+
         player.update();
+        gem.update();
     }
 
     /* This function initially draws the "game level", it will then call
@@ -104,16 +109,17 @@ var Engine = (function(global) {
      * they are just drawing the entire screen over and over.
      */
     function render() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
         /* This array holds the relative URL to the image used
          * for that particular row of the game level.
          */
         var rowImages = [
                 'images/water-block.png',   // Top row is water
-                'images/stone-block.png',   // Row 1 of 3 of stone
-                'images/stone-block.png',   // Row 2 of 3 of stone
-                'images/stone-block.png',   // Row 3 of 3 of stone
-                'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png'    // Row 2 of 2 of grass
+                'images/stone-block.png',   // Row 1 of 4 of stone
+                'images/stone-block.png',   // Row 2 of 4 of stone
+                'images/stone-block.png',   // Row 3 of 4 of stone
+                'images/stone-block.png',   // Row 4 of 4 of stone
+                'images/grass-block.png'    // Row 1 of 1 of grass
             ],
             numRows = 6,
             numCols = 5,
@@ -148,11 +154,19 @@ var Engine = (function(global) {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
+
+
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
 
+        allRocks.forEach(function(rock) {
+            rock.render();
+        });
+
+        gem.render();
         player.render();
+
     }
 
     /* This function does nothing but it could have been a good place to
@@ -172,7 +186,11 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-pink-girl.png',
+        'images/char-pink-girl-dead.png',
+        'images/char-pink-girl-t.png',
+        'images/gem-blue.png',
+        'images/rock.png'
     ]);
     Resources.onReady(init);
 
