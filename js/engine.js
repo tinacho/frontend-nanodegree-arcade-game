@@ -64,7 +64,6 @@ var Engine = (function(global) {
      * game loop.
      */
     function init() {
-        reset();
         lastTime = Date.now();
         main();
     }
@@ -79,11 +78,10 @@ var Engine = (function(global) {
      * on the entities themselves within your app.js file).
      */
     function update(dt) {
-        updateEntities(dt);
-        gameStatus();
-        scoreDisplay();
-        livesDisplay();
-        // checkCollisions();
+    	gameStatus.update();
+        if(lives > 0 && score < winScore) {
+            updateEntities(dt);
+        }
     }
 
     /* This is called by the update function and loops through all of the
@@ -100,6 +98,7 @@ var Engine = (function(global) {
 
         player.update();
         gem.update();
+
     }
 
     /* This function initially draws the "game level", it will then call
@@ -154,7 +153,6 @@ var Engine = (function(global) {
          * the render function you have defined.
          */
 
-
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
@@ -165,7 +163,7 @@ var Engine = (function(global) {
 
         gem.render();
         player.render();
-
+        gameStatus.render();
     }
 
     /* This function does nothing but it could have been a good place to
@@ -173,7 +171,6 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop
     }
 
     /* Go ahead and load all of the images we know we're going to need to
