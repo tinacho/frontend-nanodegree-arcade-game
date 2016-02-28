@@ -76,7 +76,7 @@ var GameStatus = function() {
 * enemies are created outside of canvas but not all at the same x position to avoid crowding at the start of the game
 * y position determines in which row the enemies will be created
 * width and height are predetermined and unchanging
-* speed is number randomly generated within certain parameters
+* speed is a number randomly generated within certain parameters
 */
 var Enemy = function() {
 	this.sprite = 'images/enemy-bug.png';
@@ -122,7 +122,7 @@ var Enemy = function() {
 /*
 * Define the Player object with starting properties
 * this.alive property set to true by default, and invisible to false
-* when this.invisible property is set to true, player is not affected by collision with bugs and can go through stones
+* when this.invisible property is set to true, player is not affected by collision with bugs and can go through rocks
 */
 var Player = function() {
 	this.sprite = 'images/char-pink-girl.png';
