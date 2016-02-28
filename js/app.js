@@ -2,17 +2,16 @@
 * Declare all global variables
 */
 var canvasWidth = 505,
-	canvasHeight = 606,
 	minSpeed = 150,
 	maxSpeed = 500,
 	playerStartX = 202,
 	playerStartY = 390,
 	lives = 3,
 	score = 0,
-	winScore = 100;
+	winScore = 100,
 	playerStepX = 101,
-	playerStepY = 83;
-	spriteWidth = 101;
+	playerStepY = 83,
+	spriteWidth = 101,
 	spriteHeight = 171;
 
 /*
@@ -34,7 +33,7 @@ function reload() {
 * Define the GameStatus object for displaying score and game status messages
 * if the player loses all lives, "Gama over!" message is displayed
 * if the player reaches winning score of 100, "You won!" message is displayed
-* in both cases there's a button with a callback to reset the game
+* in both cases there"s a button with a callback to reset the game
 */
 var GameStatus = function() {
 	this.losingString = "Game over! :(";
@@ -44,16 +43,16 @@ var GameStatus = function() {
 		var message = document.getElementById("game-message");
 		var button = document.getElementById("button");
 
-		if(lives == 0) {
+		if(lives === 0) {
 			message.innerHTML = this.losingString;
 			button.className = "display-normal";
 		}
 
-		else if(score == winScore) {
+		else if(score === winScore) {
 			message.innerHTML = this.winningString;
 			button.className = "display-normal";
 		}
-	}
+	};
 
 	this.render = function() {
 		var button = document.getElementById("button");
@@ -66,10 +65,10 @@ var GameStatus = function() {
 		}
 
 		else if (button.attachEvent) {
-			button.attachEvent('onclick', reload);
+			button.attachEvent("onclick", reload);
 		}
-	}
-}
+	};
+};
 
 /*
 * Define the Enemy object with starting properties
@@ -79,7 +78,7 @@ var GameStatus = function() {
 * speed is a number randomly generated within certain parameters
 */
 var Enemy = function() {
-	this.sprite = 'images/enemy-bug.png';
+	this.sprite = "images/enemy-bug.png";
 	this.x = -spriteWidth * getRandomInt(1, 4);
 	this.y = 65 + 83 * getRandomInt(1, 4);
 	this.width = spriteWidth;
@@ -88,9 +87,9 @@ var Enemy = function() {
 
 	/*
 	* Define movement and speed of enemies
-	* when they leave canvas bounds they're moved back to the beginning
+	* when they leave canvas bounds they"re moved back to the beginning
 	* if there are two or more enemies in one row,
-	* those behind shouldn't be faster that the one in front, to avoid bugs going over each other
+	* those behind shouldn"t be faster that the one in front, to avoid bugs going over each other
 	*/
 	this.update = function(dt) {
 		this.x = this.x + this.speed * dt;
@@ -100,7 +99,7 @@ var Enemy = function() {
 			var slowestSpeed = maxSpeed;
 
 			allEnemies.forEach(function(enemy) {
-				if (this.y == enemy.y && this.x != enemy.x) {
+				if (this.y === enemy.y && this.x != enemy.x) {
 					if (enemy.x < 0) {
 						this.x -= spriteWidth + (this.x - enemy.x);
 					}
@@ -125,7 +124,7 @@ var Enemy = function() {
 * when this.invisible property is set to true, player is not affected by collision with bugs and can go through rocks
 */
 var Player = function() {
-	this.sprite = 'images/char-pink-girl.png';
+	this.sprite = "images/char-pink-girl.png";
 	this.alive = true;
 	this.invisible = false;
 	this.x = playerStartX;
@@ -138,7 +137,7 @@ var Player = function() {
 	* Check for collision with gems always
 	*/
 	this.update = function(dt) {
-		if (this.alive == true && this.invisible == false){
+		if (this.alive === true && this.invisible === false){
 			this.collisionWithBugs();
 		}
 		this.collisionWithGem();
@@ -151,17 +150,17 @@ var Player = function() {
 	/*
 	* Define player and enemy collision
 	* player sprite changes
-	* set player alive property to false (then update functions doesn't check for collision anymore until the player reset)
+	* set player alive property to false (then update functions doesn"t check for collision anymore until the player reset)
 	* lives variable is reduced by one
 	* player reset method is called with a small delay
 	*/
 	this.collisionWithBugs = function() {
 		allEnemies.forEach(function(enemy) {
 			if (Math.abs(this.x - enemy.x) < 70 && Math.abs(this.y - enemy.y) < 50) {
-				this.sprite = 'images/char-pink-girl-dead.png';
+				this.sprite = "images/char-pink-girl-dead.png";
 				this.alive = false;
 				lives -= 1;
-				document.getElementById('lives-counter').className = 'score-minus';
+				document.getElementById("lives-counter").className = "score-minus";
 				setTimeout(this.reset, 100);
 			}
 		}, this);
@@ -174,73 +173,73 @@ var Player = function() {
 	*/
 	this.collisionWithGem = function() {
 		if (Math.abs(this.x - gem.x) < 70 && Math.abs(this.y - gem.y) < 50) {
-				this.sprite = 'images/char-pink-girl-t.png';
+				this.sprite = "images/char-pink-girl-t.png";
 				gem.y = -500;
 				this.invisible = true;
 			}
-		}
+		};
 
 	/*
 	* Reset all player properties to default values
-	* set default class to score-counter element
+	* set default class to lives-counter element
 	* call reset gem method
 	*/
 	this.reset = function() {
-		player.sprite = 'images/char-pink-girl.png';
+		player.sprite = "images/char-pink-girl.png";
 		player.alive = true;
 		player.invisible = false;
 		player.x = playerStartX;
 		player.y = playerStartY;
-		document.getElementById('score-counter').className = 'score';
+		document.getElementById("lives-counter").className = "";
 		gem.reset();
-	}
+	};
 };
 
 
 /*
 * Determine distance and direction player moves with each allowed key stroke
-* define bounds that player can't pass, like canvas bounds and rocks
+* define bounds that player can"t pass, like canvas bounds and rocks
 * every time player reaches water add 10 points to the score variable and reset the player
 */
 Player.prototype.handleInput = function(key) {
-	if (key == 'left') {
+	if (key === "left") {
 		this.x -= playerStepX;
 		if (this.x < 0) {
 			this.x = 0;
 		}
 		allRocks.forEach(function(rock) {
-			if (Math.abs(this.y - rock.y) < 50 && this.x == rock.x && this.invisible == false) {
+			if (Math.abs(this.y - rock.y) < 50 && this.x === rock.x && this.invisible === false) {
 				this.x = rock.x + playerStepX;
 			}
 		}, this);
 	}
 
-	else if (key == 'right') {
+	else if (key === "right") {
 		this.x += playerStepX;
 		if (this.x > canvasWidth - playerStepX) {
 			this.x = canvasWidth - playerStepX;
 		}
 		allRocks.forEach(function(rock) {
-			if (Math.abs(this.y - rock.y) < 50 && this.x == rock.x && this.invisible == false) {
+			if (Math.abs(this.y - rock.y) < 50 && this.x === rock.x && this.invisible === false) {
 				this.x = rock.x - playerStepX;
 			}
 		}, this);
 	}
 
-	else if (key == 'up') {
+	else if (key === "up") {
 		this.y -= playerStepY;
 		if (this.y <= 0) {
 			this.reset();
 			score += 10;
 		}
 		allRocks.forEach(function(rock) {
-			if (Math.abs(this.y - rock.y) < 50 && this.x == rock.x && this.invisible == false) {
+			if (Math.abs(this.y - rock.y) < 50 && this.x === rock.x && this.invisible === false) {
 				this.y = playerStartY - playerStepY * 3;
 			}
 		}, this);
 	}
 
-	else if (key == 'down') {
+	else if (key === "down") {
 		this.y += playerStepY;
 		if (this.y > playerStartY) {
 			this.y = playerStartY;
@@ -254,7 +253,7 @@ Player.prototype.handleInput = function(key) {
 * gem appears in a random position when game starts, collision with bugs resets it to a new random position
 */
 var Gem = function() {
-	this.sprite = 'images/gem-blue.png';
+	this.sprite = "images/gem-blue.png";
 	this.active = true;
 	this.x = spriteWidth * getRandomInt(0, 5);
 	this.y = 55 + 83 * getRandomInt(1, 4);
@@ -262,7 +261,7 @@ var Gem = function() {
 	this.height = spriteHeight;
 
 	this.update = function(dt) {
-		if (this.active == true) {
+		if (this.active === true) {
 			this.collisionWithBugs();
 		}
 	};
@@ -292,7 +291,7 @@ var Gem = function() {
 * Define the Rock object that blocks player from reaching the water
 */
 var Rock = function() {
-	this.sprite = 'images/rock.png';
+	this.sprite = "images/rock.png";
 	this.x = spriteWidth;
 	this.y = 50;
 	this.width = spriteWidth;
@@ -309,12 +308,12 @@ var Rock = function() {
 */
 var allEnemies = [];
 for (var i = 0; i < 4; i++) {
-	allEnemies.push(new Enemy);
+	allEnemies.push(new Enemy());
 }
 
-var player = new Player;
-var gem = new Gem;
-var gameStatus = new GameStatus;
+var player = new Player();
+var gem = new Gem();
+var gameStatus = new GameStatus();
 
 
 /*
@@ -336,24 +335,24 @@ while (i--) {
 
 /*
 * Using first 4 numbers from the randomized array to define x positions of rocks makes different
-* rock layouts every time game starts and makes sure rocks aren't overlapping
+* rock layouts every time game starts and makes sure rocks aren"t overlapping
 */
 for (var i = 0; i < 4; i++) {
-	allRocks.push(new Rock);
+	allRocks.push(new Rock());
 	allRocks[i].x = spriteWidth * randomizedNumbers[i];
 }
 
 
 /*
 * Listen for keyboard key presses and sends the keys to Player.handleInput() method if the game is still running,
-* meaning if there are still lives left and score didn't reach winning score
+* meaning if there are still lives left and score didn"t reach winning score
 */
-document.addEventListener('keydown', function(e) {
+document.addEventListener("keydown", function(e) {
 	var allowedKeys = {
-		37: 'left',
-		38: 'up',
-		39: 'right',
-		40: 'down'
+		37: "left",
+		38: "up",
+		39: "right",
+		40: "down"
 	};
 
 	if(lives > 0 && score < winScore) {
