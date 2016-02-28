@@ -1,74 +1,74 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  text-align: center;
-  background-color: #222;
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	text-align: center;
+	background-color: #222;
 }
 
 img {
-  width: 35px;
-  vertical-align: middle;
+	width: 35px;
+	vertical-align: middle;
 }
 
 canvas {
-  margin: 0;
+	margin: 0;
 }
 
 p {
-  margin: 0;
+	margin: 0;
 }
 
 .stats {
-  margin: -10px auto 0 auto;
-  width: 505px;
-  text-transform: uppercase;
-  font-size: 1.8em;
-  color: gold;
-  padding-top: 5px;
+	margin: -10px auto 0 auto;
+	width: 505px;
+	text-transform: uppercase;
+	font-size: 1.8em;
+	color: gold;
+	padding-top: 5px;
 }
 
 .stats p {
-  display: inline-block;
-  margin-top: 0;
+	display: inline-block;
+	margin-top: 0;
 }
 
 .score-minus {
-  color: red;
+	color: red;
 }
 
 .score-plus {
-  color: green;
+	color: green;
 }
 
 .star-icon {
-  margin-bottom: 6px;
+	margin-bottom: 6px;
 }
 
 .heart-icon {
-  margin-left: 30px;
-  margin-bottom: 5px;
+	margin-left: 30px;
+	margin-bottom: 5px;
 }
 
 .display-none {
-  display: none;
+	display: none;
 }
 
 #button {
-  background-color: gold;
-  border: none;
-  font-size: 1.2em;
-  color: #333;
-  text-transform: uppercase;
-  padding: 10px 20px;
-  border-radius: 30px;
+	background-color: gold;
+	border: none;
+	font-size: 1.2em;
+	color: #333;
+	text-transform: uppercase;
+	padding: 10px 20px;
+	border-radius: 30px;
 }
 
 #game-message {
-  text-transform: uppercase;
-  font-size: 1.2em;
-  margin: 10px;
-  color: gold;
+	text-transform: uppercase;
+	font-size: 1.2em;
+	margin: 10px;
+	color: gold;
 }
 
 
