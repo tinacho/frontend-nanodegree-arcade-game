@@ -1,6 +1,12 @@
 frontend-nanodegree-arcade-game
 ===============================
 
-Students should use this [rubric](https://www.udacity.com/course/viewer/#!/c-nd001/l-2696458597/m-2687128535) for self-checking their submission.
+To run the game, open index.html
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+Play instructions:
+- move player with keyboard keys: left, right, up, down
+- reaching water increases score by 10 points
+- collision with bugs(enemies) decreases lives count by one
+- collecting a gem gives invisibility power to a player
+- game is won when the score of 100 is reached
+- game is lost when player has no more lives
